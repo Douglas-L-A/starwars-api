@@ -2,27 +2,34 @@ from app.services.swampi_service import get_characters
 from app.utils.filters import filter_characters
 from app.utils.sort import sort_results
 from app.utils.pagination import apply_limit
-from app.utils.validators import validate_order_params
+from app.utils.validators import (
+    validate_order,
+    validate_order_by
+)
 
-def list_characters(request):
+ALLOWED_CHARACTERS_FIELDS = {"name", "height", "mass"}
+
+def list_characters(query_params):
     characters = get_characters()
+    filtered_characters = filter_characters(characters, query_params)
 
-    filters = {
-        "name": request.args.get("name"),
-        "gender": request.args.get("gender")
-    }
+    order_by = validate_order_by(
+        query_params.get("order_by"),
+        ALLOWED_CHARACTERS_FIELDS
+    )
+    order = validate_order(
+        query_params.get("order")
+    )
+    
+    #limit = request.args.get("limit")
 
-    order_by = request.args.get("order_by")
-    order = request.args.get("order", "asc")
-    limit = request.args.get("limit")
-
-    validate_order_params(order_by, order)
-
-    characters = filter_characters(characters, filters)
-    characters = sort_results(characters, order_by, order)
-    characters = apply_limit(characters, limit)
+    sorted_characters = sort_results(
+        filtered_characters,
+        order_by=order_by,
+        order = order
+    )
 
     return {
-        "count": len(characters),
-        "results": characters
+        "count": len(sorted_characters),
+        "results": sorted_characters
     }

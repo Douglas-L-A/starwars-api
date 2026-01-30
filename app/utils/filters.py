@@ -21,6 +21,7 @@ def filter_characters(characters, filters):
 def filter_films(films, filters):
     result = films
 
+    # Filtro por título
     if filters.get("title"):
         result = [
             f for f in result

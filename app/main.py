@@ -15,7 +15,7 @@ def main(request):
 
     # GET /characters
     if path == "/characters" and method == "GET":
-        response = list_characters(request)
+        response = list_characters(request.args)
 
         return (
             json.dumps(response),
@@ -51,7 +51,7 @@ def main(request):
     
     # Retorno padrão
     return (
-        json.dumps({"message": "Star Wars API is running 🚀"}),
+        json.dumps({"message": "Star Wars API is running..."}["message"]),
         200,
         {"Content-Type": "application/json"}
     )
