@@ -1,0 +1,12 @@
+paths:
+  /characters:
+    get:
+      summary: Lista personagens de Star Wars
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de personagens
