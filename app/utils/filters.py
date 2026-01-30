@@ -16,3 +16,15 @@ def filter_characters(characters, filters):
         ]
 
     return result
+
+
+def filter_films(films, filters):
+    result = films
+
+    if filters.get("title"):
+        result = [
+            f for f in result
+            if filters["title"].lower() in f.get("title", "").lower()
+        ]
+
+    return result
