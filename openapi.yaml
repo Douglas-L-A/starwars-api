@@ -1,4 +1,3 @@
-paths:
   /characters:
     get:
       summary: Lista personagens de Star Wars
@@ -7,6 +6,26 @@ paths:
           in: query
           schema:
             type: string
+        - name: gender
+          in: query
+          schema:
+            type: string
+        - name: order_by
+          in: query
+          schema:
+            type: string
+            enum: [name, height]
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: limit
+          in: query
+          schema:
+            type: integer
       responses:
         '200':
           description: Lista de personagens
+        '400':
+          description: Parâmetros inválidos
