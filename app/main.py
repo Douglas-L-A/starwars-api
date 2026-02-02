@@ -7,9 +7,6 @@ from app.controllers.films_controller import (
 
 
 def main(request):
-    print("PATH RECEBIDO:", request.path)
-    print("METHOD:", request.method)
-
     path = request.path
     method = request.method
 

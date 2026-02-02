@@ -8,6 +8,8 @@ from app.utils.filters import (
     filter_characters
 )
 from app.controllers.base_controller import list_resource
+from app.utils.cache import get_cache, set_cache
+
 
 ALLOWED_FILMS_FIELDS = {"title", "episode_id", "release_date"}
 ALLOWED_CHARACTERS_FIELDS = {"name", "height", "mass"}
@@ -29,11 +31,28 @@ def list_films(query_params):
 
 
 def list_film_characters(film_id, query_params):
-    film = get_film_by_id(film_id)
+    cache_key = f"film:{film_id}:characters"
+    cached = get_cache(cache_key)
 
-    characters = get_resources_from_urls(
-        film.get("characters", [])
-    )
+    if cached:
+        film = cached["film"]
+        characters = cached["characters"]
+    else:
+        film_data = get_film_by_id(film_id)
+
+        film = {
+            "title": film_data["title"],
+            "release_date": film_data["release_date"]
+        }
+
+        characters = get_resources_from_urls(
+            film_data.get("characters", [])
+        )
+
+        set_cache(cache_key, {
+            "film": film,
+            "characters": characters
+        }, ttl=300)
 
     data_list = list_resource(
         data=characters,

@@ -1,5 +1,6 @@
 from app.utils.sort import sort_results
 from app.utils.validators import validate_order, validate_order_by
+from app.utils.pagination import apply_limit
 
 def list_resource(
     *,
@@ -24,4 +25,9 @@ def list_resource(
         order=order
     )
 
-    return sorted_results
+    limited_results = apply_limit(
+        sorted_results,
+        query_params.get("limit")
+    )
+
+    return limited_results
