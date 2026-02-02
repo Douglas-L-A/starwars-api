@@ -11,8 +11,15 @@ from app.controllers.base_controller import list_resource
 from app.utils.cache import get_cache, set_cache
 
 
-ALLOWED_FILMS_FIELDS = {"title", "episode_id", "release_date"}
-ALLOWED_CHARACTERS_FIELDS = {"name", "height", "mass"}
+ALLOWED_FILMS_FIELDS = {
+    "order_by": {"title", "episode_id", "release_date"},
+    "filters": {"title"}
+}
+
+ALLOWED_CHARACTERS_FIELDS = {
+    "order_by": {"name", "height", "mass"},
+    "filters": {"name", "gender"}
+}
 
 def list_films(query_params):
     films = get_resource("films")
@@ -21,7 +28,7 @@ def list_films(query_params):
         data=films,
         query_params=query_params,
         filter_fn=filter_films,
-        allowed_order_fields=ALLOWED_FILMS_FIELDS
+        allowed_fields=ALLOWED_FILMS_FIELDS
     )
 
     return {
@@ -58,7 +65,7 @@ def list_film_characters(film_id, query_params):
         data=characters,
         query_params=query_params,
         filter_fn=filter_characters,
-        allowed_order_fields=ALLOWED_CHARACTERS_FIELDS
+        allowed_fields=ALLOWED_CHARACTERS_FIELDS
     )
 
     return {
