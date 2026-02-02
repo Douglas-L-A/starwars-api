@@ -1,71 +1,50 @@
 from app.services.swampi_service import (
-    get_films,
+    get_resource,
     get_film_by_id,
-    get_characters_from_film
+    get_resources_from_urls
 )
 from app.utils.filters import (
-    filter_characters,
-    filter_films
+    filter_films,
+    filter_characters
 )
-from app.utils.sort import sort_results
-from app.utils.validators import (
-    validate_order,
-    validate_order_by
-)
+from app.controllers.base_controller import list_resource
 
 ALLOWED_FILMS_FIELDS = {"title", "episode_id", "release_date"}
 ALLOWED_CHARACTERS_FIELDS = {"name", "height", "mass"}
 
-
 def list_films(query_params):
-    films = get_films()
-    filtered_films = filter_films(films, query_params)
+    films = get_resource("films")
 
-    order_by = validate_order_by(
-        query_params.get("order_by"),
-        ALLOWED_FILMS_FIELDS
-    )
-    order = validate_order(
-        query_params.get("order")
-    )
-
-    sorted_films = sort_results(
-        filtered_films,
-        order_by=order_by,
-        order=order
+    data_list = list_resource(
+        data=films,
+        query_params=query_params,
+        filter_fn=filter_films,
+        allowed_order_fields=ALLOWED_FILMS_FIELDS
     )
 
     return {
-        "count": len(sorted_films),
-        "results": sorted_films
+        "count": len(data_list),
+        "results": data_list
     }
 
 
 def list_film_characters(film_id, query_params):
     film = get_film_by_id(film_id)
 
-    character_urls = film.get("characters", [])
-    characters = get_characters_from_film(character_urls)
-
-    filtered_characters = filter_characters(characters, query_params)
-
-    order_by = validate_order_by(
-        query_params.get("order_by"),
-        ALLOWED_CHARACTERS_FIELDS
-    )
-    order = validate_order(
-        query_params.get("order")
+    characters = get_resources_from_urls(
+        film.get("characters", [])
     )
 
-    sorted_characters = sort_results(
-        filtered_characters,
-        order_by=order_by,
-        order=order
+    data_list = list_resource(
+        data=characters,
+        query_params=query_params,
+        filter_fn=filter_characters,
+        allowed_order_fields=ALLOWED_CHARACTERS_FIELDS
     )
 
     return {
         "film": film["title"],
         "release_date": film["release_date"],
-        "total_characters": len(sorted_characters),
-        "characters": sorted_characters
+        "total_characters": len(data_list),
+        "characters": data_list
     }
