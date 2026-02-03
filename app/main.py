@@ -12,9 +12,9 @@ def api_home():
         json.dumps({
             "message": "API is running...",
             "endpoints": {
-                "films": "/films",
-                "characters": "/characters",
-                "film_characters": "/films/1/characters"
+                "films": "/starwars_api/films",
+                "characters": "/starwars_api/characters",
+                "film_characters": "/starwars_api/films/1/characters"
             }
         }),
         200,
