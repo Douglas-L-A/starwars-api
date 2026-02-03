@@ -22,7 +22,7 @@ ALLOWED_CHARACTERS_FIELDS = {
     "filters": {"name", "gender"}
 }
 
-@require_api_key
+
 def list_films(query_params):
     films = get_resource("films")
 

@@ -9,7 +9,6 @@ ALLOWED_CHARACTERS_FIELDS = {
 }
 
 
-@require_api_key
 def list_characters(query_params):
     characters = get_resource("people")
 
