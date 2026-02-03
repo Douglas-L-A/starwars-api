@@ -14,7 +14,7 @@ def api_home():
             "endpoints": {
                 "films": "/films",
                 "characters": "/characters",
-                "film_characters": "/films/<id>/characters"
+                "film_characters": "/films/1/characters"
             }
         }),
         200,
