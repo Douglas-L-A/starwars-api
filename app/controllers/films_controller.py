@@ -9,6 +9,7 @@ from app.utils.filters import (
 )
 from app.controllers.base_controller import list_resource
 from app.utils.cache import get_cache, set_cache
+from app.auth.api_key import require_api_key
 
 
 ALLOWED_FILMS_FIELDS = {
@@ -21,6 +22,7 @@ ALLOWED_CHARACTERS_FIELDS = {
     "filters": {"name", "gender"}
 }
 
+@require_api_key
 def list_films(query_params):
     films = get_resource("films")
 
@@ -37,6 +39,7 @@ def list_films(query_params):
     }
 
 
+@require_api_key
 def list_film_characters(film_id, query_params):
     cache_key = f"film:{film_id}:characters"
     cached = get_cache(cache_key)

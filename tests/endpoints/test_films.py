@@ -1,5 +1,8 @@
 def test_list_films_success(client):
-    response = client.get("/films")
+    response = client.get(
+        "/films",
+        headers={"X-API-KEY": "test-key"}
+    )
 
     assert response.status_code == 200
 
@@ -10,7 +13,10 @@ def test_list_films_success(client):
 
 
 def test_list_film_characters_success(client):
-    response = client.get("/films/1/characters")
+    response = client.get(
+        "/films/1/characters",
+        headers={"X-API-KEY": "test-key"}
+    )
 
     assert response.status_code == 200
 

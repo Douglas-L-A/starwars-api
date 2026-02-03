@@ -1,4 +1,6 @@
-__pycache__.py/
+__pycache__/
+*.pyc
 .pytest_cache/
 .env
-*.pyc
+venv/
+.starwars-api/

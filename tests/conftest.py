@@ -9,7 +9,7 @@ sys.path.insert(
     os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 )
 
-from app.main import main  # ajuste se o caminho for diferente
+from app.main import main 
 
 
 # Fixture do client
@@ -27,3 +27,8 @@ def client():
 
     with app.test_client() as client:
         yield client
+
+
+@pytest.fixture(autouse=True)
+def set_api_key_env(monkeypatch):
+    monkeypatch.setenv("API_KEY", "test-key")

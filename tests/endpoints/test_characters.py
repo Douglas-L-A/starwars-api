@@ -1,5 +1,8 @@
 def test_list_characters_success(client):
-    response = client.get("/characters")
+    response = client.get(
+        "/characters",
+        headers={"X-API-KEY": "test-key"}
+    )
 
     assert response.status_code == 200
 

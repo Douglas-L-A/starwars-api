@@ -1,4 +1,4 @@
-from werkzeug.exceptions import BadRequest, NotFound
+from werkzeug.exceptions import BadRequest, NotFound, Unauthorized, InternalServerError
 import json
 from app.controllers.characters_controller import list_characters
 from app.controllers.films_controller import (
@@ -81,12 +81,14 @@ def main(request):
     
     except BadRequest as e:
         return error_response(str(e), 400)
-    
+
+    except Unauthorized as e:
+        return error_response(str(e), 401)
+
     except NotFound as e:
         return error_response(str(e), 404)
-    
-    except Exception:
-        return error_response("Internal server error", 500)
 
+    except InternalServerError as e:
+        return error_response(str(e), 500)
 
 
