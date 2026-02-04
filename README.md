@@ -8,14 +8,15 @@ API para consulta de informações de filmes e personagens do universo Star Wars
 
 ---
 
-## 🏗️ Arquitetura Técnica
+## 🧩 Arquitetura Técnica
 
 O projeto segue uma arquitetura **Serverless** baseada em eventos, hospedada no Google Cloud Platform (GCP). Abaixo, o diagrama detalha o fluxo de dados e os componentes envolvidos.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'fontFamily': 'Montserrat, Trebuchet MS, Verdana, sans-serif', 'fontSize': '14px' }}}%%
 graph TD
     subgraph Client_Side [Cliente]
-        Browser["Navegador / Curl"]
+        Browser[Navegador / Curl]
     end
 
     subgraph GCP [GCP]
@@ -24,7 +25,7 @@ graph TD
         CF[Cloud Functions 2nd Gen]
         
         subgraph App_Logic [Python / Flask]
-            Auth["Auth Middleware<br/>(API Key Check)"]
+            Auth[Auth Middleware<br/>API Key Check]
             Router[Flask Router]
             Controller[Controllers Layer]
             Service[SWAPI Service]
@@ -39,7 +40,7 @@ graph TD
     end
 
     subgraph External [Externo]
-        SWAPI["SWAPI.dev<br/>(Fonte de Dados)"]
+        SWAPI[SWAPI.dev<br/>Fonte de Dados]
     end
 
     %% Fluxo
@@ -65,14 +66,14 @@ starwars-api/
 │  ├─ main.py                # Entry-point da aplicação (GCP / Flask)
 │  ├─ auth/                 
 │  │  └─ api_key.py          # Lógica de autenticação via API Key
-│  ├─ controllers/          
+│  ├─ controllers/           # Lógica de controle e rotas
 │  │  ├─ base_controller.py
 │  │  ├─ characters_controller.py
 │  │  └─ films_controller.py
 │  ├─ services/             
-│  │  └─ swampi_service.py  # Integração e consumo da SWAPI
-│  └─ utils/                
-│     ├─ cache.py            # Implementação de cache interno
+│  │  └─ swampi_service.py   # Integração e consumo da SWAPI
+│  └─ utils/                 # Funções para aplicação (filtros, ordenação, etc)
+│     ├─ cache.py           
 │     ├─ filters.py
 │     ├─ pagination.py
 │     ├─ sort.py
@@ -84,6 +85,16 @@ starwars-api/
 ├─ README.md
 ├─ .gitignore
 └─ tests/                   # Testes unitários e de endpoints
+   ├─ endpoints/ 
+   │     ├─ test_auth.py 
+   │     ├─ test_characters.py 
+   │     ├─ test_films.py 
+   │     └─ test_errors.py 
+   └─ utils/  
+         ├─ test_filters.py   
+         ├─ test_pagination.py   
+         ├─ test_sort.py 
+         └─ test_validators.py        
 ```
 
 ## ⚙️ Rodando Localmente
