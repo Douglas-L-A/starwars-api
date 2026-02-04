@@ -15,7 +15,7 @@ O projeto segue uma arquitetura **Serverless** baseada em eventos, hospedada no 
 ```mermaid
 graph TD
     subgraph Client_Side [Cliente]
-        Browser[Navegador / Curl]
+        Browser["Navegador / Curl"]
     end
 
     subgraph GCP [Google Cloud Platform]
@@ -24,7 +24,7 @@ graph TD
         CF[Cloud Functions 2nd Gen]
         
         subgraph App_Logic [Aplicação Python / Flask]
-            Auth[Auth Middleware<br/>(API Key Check)]
+            Auth["Auth Middleware<br/>(API Key Check)"]
             Router[Flask Router]
             Controller[Controllers Layer]
             Service[SWAPI Service]
@@ -39,7 +39,7 @@ graph TD
     end
 
     subgraph External [Externo]
-        SWAPI[SWAPI.dev<br/>(Fonte de Dados)]
+        SWAPI["SWAPI.dev<br/>(Fonte de Dados)"]
     end
 
     %% Fluxo
@@ -62,6 +62,7 @@ graph TD
 starwars-api/
 │
 ├─ app/
+│  ├─ main.py                # Entry-point da aplicação (GCP / Flask)
 │  ├─ auth/                 
 │  │  └─ api_key.py          # Lógica de autenticação via API Key
 │  ├─ controllers/          
@@ -77,7 +78,6 @@ starwars-api/
 │     ├─ sort.py
 │     └─ validators.py
 │
-├─ main.py                  # Entry-point da aplicação (GCP / Flask)
 ├─ local_server.py          # Script para rodar servidor localmente
 ├─ openapi.yaml             # Documentação OpenAPI / Swagger
 ├─ requirements.txt         # Dependências do projeto
@@ -109,6 +109,7 @@ pip install -r requirements.txt
 
 ### 4. Configuração
 Configure a variável de ambiente para simular a API Key segura:
+
 Linux / macOS:
 ```bash
 export API_KEY=abc123
