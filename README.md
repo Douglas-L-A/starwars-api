@@ -77,8 +77,12 @@ python local_server.py
 A API estará disponível em: http://127.0.0.1:5000/
 
 ## 🚀 Endpoints
-A API retorna dados sempre em formato JSON.
-MétodoEndpointDescriçãoRequer AuthGET/Mensagem de status e lista de endpoints❌GET/filmsLista todos os filmes da saga❌GET/charactersLista personagens (com paginação)❌GET/films/<id>/charactersLista personagens de um filme específico✅
+| Método | Endpoint | Descrição | Requer Auth |
+| :---: | :---: | :---: | :---: |
+| `GET` | `/` | Mensagem de status e lista de endpoints | ❌ |
+| `GET` | `/films` | Lista todos os filmes da saga | ❌ |
+| `GET` | `/characters` | Lista personagens (com paginação) | ❌ |
+| `GET` | `/films/<id>/characters` | Lista personagens de um filme específico | ✅ |
 
 ### 📌 Parâmetros de Query (Filtros e Ordenação)
 
@@ -139,6 +143,8 @@ else:
 ```
 
 ## 💡 Observações Técnicas
-### Cache: O projeto implementa um sistema de cache interno para evitar chamadas repetitivas e desnecessárias à SWAPI original, melhorando a performance.
-### Limitação: O limit padrão de retorno é de 50 itens, mas pode ser ajustado via query parameter.
-### Segurança: A API Key nunca deve ser comitada no código fonte em ambientes de produção reais; utilize Secrets Manager ou Variáveis de Ambiente.
+Cache: O projeto implementa um sistema de cache interno para evitar chamadas repetitivas e desnecessárias à SWAPI original, melhorando a performance.
+
+Limitação: O limit padrão de retorno é de 50 itens, mas pode ser ajustado via query parameter.
+
+Segurança: A API Key nunca deve ser comitada no código fonte em ambientes de produção reais; utilize Secrets Manager ou Variáveis de Ambiente.
