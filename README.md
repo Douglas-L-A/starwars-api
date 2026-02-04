@@ -100,7 +100,7 @@ Valor: abc123 (ou a chave configurada no ambiente)
 ## ☁️ Deploy no Google Cloud Platform
 A aplicação está em produção rodando como uma Cloud Function (2nd gen).
 
-### 🔗 URL Base: https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api
+🔗 URL Base: https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api
 
 ## 🐍 Exemplos de Uso
 ### 1. Via cURL (Terminal)
@@ -125,7 +125,7 @@ print("Filmes:", resp.json())
 
 # 2. Buscar Personagens com filtro (Público)
 params = {"gender": "male", "limit": 5}
-resp = requests.get(f"{BASE_URL}/characters", params=params)
+resp = requests.get(f"{BASE_URL}/characters", params=params)```
 print("Personagens Masculinos:", resp.json())
 
 # 3. Buscar Personagens de um Filme (Privado - Requer Header)
