@@ -13,13 +13,13 @@ API para consulta de informações de filmes e personagens do universo Star Wars
 O projeto segue uma arquitetura **Serverless** baseada em eventos, hospedada no Google Cloud Platform (GCP). Abaixo, o diagrama detalha o fluxo de dados e os componentes envolvidos.
 
 ```mermaid
-graph TD
+graph LR
     subgraph Client_Side [Cliente]
         Browser["Navegador / Curl"]
     end
 
     subgraph GCP [Google Cloud Platform]
-        direction TB
+        %% Removi o direction TB para deixar o fluxo natural
         
         CF[Cloud Functions 2nd Gen]
         
