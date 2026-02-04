@@ -36,16 +36,79 @@ starwars-api/
 ├─ README.md
 ├─ .gitignore
 └─ tests/                   # Testes unitários e de endpoints
-⚙️ Rodando LocalmenteSiga os passos abaixo para executar a API em sua máquina.1. Ambiente VirtualCrie e ative o ambiente (recomendado usar Conda ou venv):Bashconda create -n starwars-api python=3.11
+
+## ⚙️ Rodando Localmente
+Siga os passos abaixo para executar a API em sua máquina.
+
+### 1. Ambiente Virtual
+Crie e ative o ambiente (recomendado usar Conda ou venv):
+```txt
+conda create -n starwars-api python=3.11
 conda activate starwars-api
-2. InstalaçãoInstale as dependências listadas no requirements.txt:Bashpip install -r requirements.txt
-3. ConfiguraçãoConfigure a variável de ambiente para simular a API Key segura:Linux / macOS:Bashexport API_KEY=abc123
-Windows (CMD):DOSset API_KEY=abc123
-PowerShell:PowerShell$env:API_KEY="abc123"
-4. ExecuçãoInicie o servidor local:Bashpython local_server.py
-A API estará disponível em: http://127.0.0.1:5000/🚀 EndpointsA API retorna dados sempre em formato JSON.MétodoEndpointDescriçãoRequer AuthGET/Mensagem de status e lista de endpoints❌GET/filmsLista todos os filmes da saga❌GET/charactersLista personagens (com paginação)❌GET/films/<id>/charactersLista personagens de um filme específico✅📌 Parâmetros de Query (Filtros e Ordenação)Você pode refinar as buscas utilizando os seguintes parâmetros na URL:order_by: Campo para ordenação (ex: name, height, title).order: Direção da ordenação (asc ou desc).limit: Número máximo de resultados (Padrão: 50).Filtros específicos:/characters aceita: name, gender./films aceita: title.🔐 AutenticaçãoPara acessar endpoints protegidos (como /films/<id>/characters), é necessário enviar a chave de API no cabeçalho da requisição:Header: X-API-KEYValor: abc123 (ou a chave configurada no ambiente)☁️ Deploy no Google Cloud PlatformA aplicação está em produção rodando como uma Cloud Function (2nd gen).🔗 URL Base: https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api🐍 Exemplos de Uso1. Via cURL (Terminal)Exemplo de requisição autenticada para buscar personagens do filme 1:Bashcurl -H "X-API-KEY: abc123" \
+
+### 2. Instalação
+Instale as dependências listadas no requirements.txt:
+```txt
+pip install -r requirements.txt
+
+### 3. Configuração
+Configure a variável de ambiente para simular a API Key segura:
+Linux / macOS:
+```txt
+export API_KEY=abc123
+Windows (CMD):
+```txt
+set API_KEY=abc123
+Windows PowerShell:
+```txt
+$env:API_KEY="abc123"
+
+### 4. Execução
+Inicie o servidor local:
+```txt
+python local_server.py
+
+A API estará disponível em: http://127.0.0.1:5000/
+
+## 🚀 Endpoints
+A API retorna dados sempre em formato JSON.
+MétodoEndpointDescriçãoRequer AuthGET/Mensagem de status e lista de endpoints❌GET/filmsLista todos os filmes da saga❌GET/charactersLista personagens (com paginação)❌GET/films/<id>/charactersLista personagens de um filme específico✅
+
+### 📌 Parâmetros de Query (Filtros e Ordenação)
+
+Você pode refinar as buscas utilizando os seguintes parâmetros na URL:
+order_by: Campo para ordenação (ex: name, height, title).
+order: Direção da ordenação (asc ou desc).
+limit: Número máximo de resultados (Padrão: 50).
+
+### Filtros específicos:
+/characters aceita: name, gender.
+/films aceita: title.
+
+## 🔐 Autenticação
+Para acessar endpoints protegidos (como /films/<id>/characters), é necessário enviar a chave de API no cabeçalho da requisição:
+
+Header: X-API-KEY
+Valor: abc123 (ou a chave configurada no ambiente)
+
+## ☁️ Deploy no Google Cloud Platform
+A aplicação está em produção rodando como uma Cloud Function (2nd gen).
+
+### 🔗 URL Base: https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api
+
+## 🐍 Exemplos de Uso
+### 1. Via cURL (Terminal)
+Exemplo de requisição autenticada para buscar personagens do filme 1:
+```txt
+curl -H "X-API-KEY: abc123" \
   [https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api/films/1/characters](https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api/films/1/characters)
-2. Via Python (Requests)Script simples para consumir a API:Pythonimport requests
+
+### 2. Via Python (Requests)
+
+Script simples para consumir a API:
+
+```txt
+import requests
 
 BASE_URL = "[https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api](https://us-central1-star-wars-api-485912.cloudfunctions.net/starwars_api)"
 
@@ -66,4 +129,9 @@ if resp.status_code == 200:
     print("Elenco do Filme 1:", resp.json())
 else:
     print("Erro de autenticação:", resp.status_code)
-💡 Observações TécnicasCache: O projeto implementa um sistema de cache interno para evitar chamadas repetitivas e desnecessárias à SWAPI original, melhorando a performance.Limitação: O limit padrão de retorno é de 50 itens, mas pode ser ajustado via query parameter.Segurança: A API Key nunca deve ser comitada no código fonte em ambientes de produção reais; utilize Secrets Manager ou Variáveis de Ambiente.
+
+
+## 💡 Observações Técnicas
+### Cache: O projeto implementa um sistema de cache interno para evitar chamadas repetitivas e desnecessárias à SWAPI original, melhorando a performance.
+### Limitação: O limit padrão de retorno é de 50 itens, mas pode ser ajustado via query parameter.
+### Segurança: A API Key nunca deve ser comitada no código fonte em ambientes de produção reais; utilize Secrets Manager ou Variáveis de Ambiente.
