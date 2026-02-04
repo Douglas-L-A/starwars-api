@@ -175,6 +175,13 @@ Para acessar endpoints protegidos (como `/films/<id>/characters`), é necessári
 Header: X-API-KEY  
 Valor: abc123 (ou a chave configurada no ambiente)
 
+## Testes
+
+O projeto inlcui uma suíte de testes desenvolvida com **Pytest** para garantir a integridade dos serviços e controllers, assim como testes unitários para as funções de filtros e ordenação. Para rodar todos os testes unitários e de integração, execute o comando na raíz do projeto:
+```bash
+pytest -v
+```
+
 ## ☁️ Deploy no Google Cloud Platform
 A aplicação está em produção rodando como uma Cloud Function (2nd gen).
 
