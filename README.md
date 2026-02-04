@@ -18,12 +18,12 @@ graph TD
         Browser["Navegador / Curl"]
     end
 
-    subgraph GCP [Google Cloud Platform]
+    subgraph GCP [GCP]
         direction TB
         
         CF[Cloud Functions 2nd Gen]
         
-        subgraph App_Logic [Aplicação Python / Flask]
+        subgraph App_Logic [Python / Flask]
             Auth["Auth Middleware<br/>(API Key Check)"]
             Router[Flask Router]
             Controller[Controllers Layer]
