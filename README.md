@@ -2,6 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-2.0+-green?style=for-the-badge&logo=flask&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-7.0+-yellow?style=for-the-badge&logo=pytest&logoColor=white)
 ![GCP](https://img.shields.io/badge/Google_Cloud-Functions-red?style=for-the-badge&logo=google-cloud&logoColor=white)
 
 API para consulta de informações de filmes e personagens do universo Star Wars, servindo como um wrapper otimizado da [SWAPI](https://swapi.dev/). O projeto foi desenvolvido em Python com Flask e arquitetado para deploy Serverless no **Google Cloud Functions**.
